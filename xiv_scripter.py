@@ -1,5 +1,6 @@
 import argparse
 import re
+import time
 from time import sleep
 
 import psutil
@@ -16,6 +17,12 @@ from utilities import LogLevel
 
 PER_RUN_DELAY = 3.0
 
+MEAT_AND_MEAD = {
+    0: 30,
+    1: 40,
+    2: 45
+}
+
 class XIVScripter:
     def __init__(
         self,
@@ -23,17 +30,28 @@ class XIVScripter:
         config='config.yaml',
         script='scripts/coffee_biscuits.script'
     ):
-        dprint(verbose, f"Reading from configuration file: [{config}]", default_priority=LogLevel.DEBUG)
+        self.verbose = verbose
+        dprint(self.verbose, f"Reading from configuration file: [{config}]", default_priority=LogLevel.DEBUG)
         with open(config) as f:
             config = yaml.load(f, Loader=Loader)
 
-        key_mapping = config.get('key_mapping', None)
-        if not key_mapping:
+        # Load variables from config
+        self._should_eat_food = config.get('eat_food', False)
+        self._meat_and_mead = config.get('meat_and_mead', 0)
+        if self._should_eat_food:
+            dprint(
+                self.verbose,
+                f'Will eat food before running the script and every {MEAT_AND_MEAD[self._meat_and_mead]} minutes after.',
+                default_priority=LogLevel.INFO
+            )
+
+        # Load in key mapping and parse script.
+        self.key_mapping = config.get('key_mapping', None)
+        if not self.key_mapping:
             raise ValueError("Key mapping must be defined in config.yaml.")
-        parser = Parser(key_mapping=key_mapping, log_level=verbose)
+        parser = Parser(key_mapping=self.key_mapping, log_level=verbose)
         self.script_list = parser.parse_script(script)
 
-        self.verbose = verbose
         match config:
             case {'target_process': target_process, 'window_title': window_title}:
                 self._window_title = window_title
@@ -80,11 +98,41 @@ class XIVScripter:
             self.send_key(key)
             sleep(delay)
 
+    def _eat_food(self):
+        """
+        Eats food and returns the time when the food will expire.
+        """
+        eat_food_key = self.key_mapping.get('eat_food', None)
+        if eat_food_key is None:
+            raise ValueError('eat_food_key must be specified if eat_food is set to True.')
+        self.send_key(eat_food_key)
+        sleep(2.5)
+        food_t1 = time.time() + MEAT_AND_MEAD[self._meat_and_mead] * 60
+
+        return food_t1
+
     def run(self, n_reps):
         """
         Runs the script n_reps times.
         """
+        dprint(self.verbose, 'Launching runs in 3...')
+        sleep(1)
+        dprint(self.verbose, '2...')
+        sleep(1)
+        dprint(self.verbose, '1...')
+        sleep(1)
+
+        # Eat food and set up the times to continue eating food.
+        if self._should_eat_food:
+            dprint(self.verbose, 'Eating food...')
+            food_t1 = self._eat_food()
+
         for i in range(n_reps):
+            if self._should_eat_food:
+                if time.time() >= food_t1:
+                    dprint(self.verbose, 'Eating food...')
+                    food_t1 = self._eat_food()
+
             dprint(self.verbose, f'Beginning run no. {i + 1}', default_priority=LogLevel.INFO)
             self._run_script()
             sleep(PER_RUN_DELAY)

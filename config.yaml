@@ -9,5 +9,8 @@ key_mapping:
   biscuit_macro: "3"
   chicken_macro_1: "5"
   chicken_macro_2: "6"
+  eat_food: "7"
 window_title: FINAL FANTASY XIV
 target_process: ffxiv_dx11.exe
+eat_food: True
+meat_and_mead: 0 # valid options are 0 for off, 1 for meat and mead 1, 2 for meat and mead 2
