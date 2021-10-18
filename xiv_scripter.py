@@ -73,7 +73,7 @@ class XIVScripter:
         Runs each command in the script and waits for the specified delay after each command.
         """
         for key, delay in self.script_list:
-            dprint(self.verbose, f'Executing command: `{key}`')
+            dprint(self.verbose, f'Executing command: `{key}`', default_priority=LogLevel.DEBUG)
             self.send_key(key)
             sleep(delay)
 
