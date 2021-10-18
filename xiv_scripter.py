@@ -27,7 +27,10 @@ class XIVScripter:
         with open(config) as f:
             config = yaml.load(f, Loader=Loader)
 
-        parser = Parser(key_mapping=config['key_mapping'], log_level=verbose)
+        key_mapping = config.get('key_mapping', None)
+        if not key_mapping:
+            raise ValueError("Key mapping must be defined in config.yaml.")
+        parser = Parser(key_mapping=key_mapping, log_level=verbose)
         self.script_list = parser.parse_script(script)
 
         self.verbose = verbose
