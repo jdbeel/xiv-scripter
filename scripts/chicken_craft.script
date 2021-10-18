@@ -6,9 +6,8 @@
 # executing.
 
 # begin the craft
-sel 
-sel
-sel
+sel 1.5
+sel 1.5
 
 # The delay here may need to be adjusted depending on your macro
 chicken_macro_1 35
