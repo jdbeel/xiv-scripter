@@ -1,0 +1,11 @@
+key_mapping:
+  esc: "{VK_ESCAPE}"
+  sel: "{VK_NUMPAD0}"
+  menu_up: "{VK_NUMPAD8}"
+  menu_down: "{VK_NUMPAD2}"
+  goto_submenu: "'"
+  tnpc: "1"
+  taf: "2"
+  biscuit_macro: "3"
+window_title: FINAL FANTASY XIV
+target_process: ffxiv_dx11.exe

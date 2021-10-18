@@ -1,0 +1,76 @@
+# Automatically turns in leves for coffe biscuits.
+# Requires that you have the other two lv 78 leves
+# already accepted so that coffee biscuits are the
+# only ones that remain.
+
+# Also ensure that you have eirikur targeted and
+# moyce focus targeted.
+
+# You'll also need to create two macros:
+# one which does /tnpc and an other which does /ta <f>
+# and place them on the appropriate keys as defined in
+# config.yaml.
+
+# select eirikur, talk to him
+tnpc 0.5
+sel
+# skip through his dialogue, select tradecraft leves
+sel
+menu_down
+# accept the leve
+sel
+sel
+sel
+# close the leve dialogue
+esc
+esc
+# target moyce
+taf 0.5
+sel
+menu_down
+menu_down
+# select the turnin
+sel
+# skip thru dialogue
+sel
+# turn in biscuits
+sel 0.5
+sel 0.5
+sel
+# confirm hq dialogue
+sel
+# get through dialogue
+sel
+sel
+# complete
+sel
+# dialogue
+sel
+# submit additional items
+sel
+# turn in biscuits
+sel 0.5
+sel 0.5
+sel
+# confirm hq dialogue
+sel
+# get through dialogue
+sel
+sel
+# complete
+sel
+# dialogue
+sel
+# submit additional items
+sel
+# turn in biscuits
+sel 0.5
+sel 0.5
+sel
+# confirm hq dialogue
+sel
+# get through dialogue
+sel
+sel
+# complete
+sel
