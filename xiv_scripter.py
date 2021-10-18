@@ -15,8 +15,6 @@ from script_parser import Parser
 from utilities import dprint
 from utilities import LogLevel
 
-PER_RUN_DELAY = 3.0
-
 MEAT_AND_MEAD = {
     0: 30,
     1: 40,
@@ -28,7 +26,8 @@ class XIVScripter:
         self,
         verbose=LogLevel.INFO,
         config='config.yaml',
-        script='scripts/coffee_biscuits.script'
+        script='scripts/coffee_biscuits.script',
+        eat_food=None
     ):
         self.verbose = verbose
         dprint(self.verbose, f"Reading from configuration file: [{config}]", default_priority=LogLevel.DEBUG)
@@ -36,8 +35,12 @@ class XIVScripter:
             config = yaml.load(f, Loader=Loader)
 
         # Load variables from config
-        self._should_eat_food = config.get('eat_food', False)
+        if eat_food is None:
+            self._should_eat_food = config.get('eat_food', False)
+        else:
+            self._should_eat_food = eat_food
         self._meat_and_mead = config.get('meat_and_mead', 0)
+        self._per_run_delay = config.get('per_run_delay', 4.0)
         if self._should_eat_food:
             dprint(
                 self.verbose,
@@ -135,13 +138,14 @@ class XIVScripter:
 
             dprint(self.verbose, f'Beginning run no. {i + 1}', default_priority=LogLevel.INFO)
             self._run_script()
-            sleep(PER_RUN_DELAY)
+            sleep(self._per_run_delay)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Runs scripts to be sent to Final Fantasy XIV.')
     parser.add_argument('--n_reps', metavar='--n_reps', type=int, default=1, help='The number of times to repeat the script.')
     parser.add_argument('--config', metavar='--config', type=str, default='config.yaml', help='The relative path to the config.yaml file.')
     parser.add_argument('--script', metavar='--script', type=str, default='scripts/coffee_biscuits_turnin.script', help='The relative path to the script file to run.')
+    parser.add_argument('--eat_food', action='store_true', default=None)
 
     arguments = vars(parser.parse_args())
     n_reps = arguments['n_reps']
