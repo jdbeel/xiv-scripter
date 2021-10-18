@@ -7,5 +7,7 @@ key_mapping:
   tnpc: "1"
   taf: "2"
   biscuit_macro: "3"
+  chicken_macro_1: "5"
+  chicken_macro_2: "6"
 window_title: FINAL FANTASY XIV
 target_process: ffxiv_dx11.exe

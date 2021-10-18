@@ -1,0 +1,15 @@
+# Automatically crafts smoked chicken using two macros.
+# make sure that the keys your crafting macros are set to
+# are specified in config.yaml.
+
+# Open your crafting log and click on smoked chicken before
+# executing.
+
+# begin the craft
+sel 
+sel
+sel
+
+# The delay here may need to be adjusted depending on your macro
+chicken_macro_1 35
+chicken_macro_2 25
