@@ -6,7 +6,7 @@ This is a tool for scripting out series of actions in FFXIV. It allows for custo
 
 - `python>=3.10`
 - Microsoft Visual C++ 14 (this one is a massive pain to install, but there are plenty of resources online.)
-- `requirements.txt
+- `requirements.txt`
 
 ## Usage
 
