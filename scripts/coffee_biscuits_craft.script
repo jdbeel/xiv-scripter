@@ -8,7 +8,7 @@
 # begin the craft
 sel 0.5
 sel 0.5
-sel
+sel 2.0
 
 # The delay here may need to be adjusted depending on your macro
 biscuit_macro 28
