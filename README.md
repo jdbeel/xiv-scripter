@@ -12,7 +12,7 @@ This is a tool for scripting out series of actions in FFXIV. It allows for custo
 
 For instance, if I wanted to craft 5 sets of coffee biscuits:
 
-`python xiv_scripter.py --n_reps 5 --script script/coffee_biscuits_craft.script`
+`python xiv_scripter.py --n_reps 5 --script script/single_macro_craft.script`
 
 For a more complete guide, see:
 
