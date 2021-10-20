@@ -40,7 +40,8 @@ class XIVScripter:
         else:
             self._should_eat_food = eat_food
         self._meat_and_mead = config.get('meat_and_mead', 0)
-        self._per_run_delay = config.get('per_run_delay', 4.0)
+        self._per_run_delay = config.get('per_run_delay', 5.0)
+        self._post_food_delay = config.get('post_food_delay', 5.0)
         if self._should_eat_food:
             dprint(
                 self.verbose,
@@ -109,7 +110,7 @@ class XIVScripter:
         if eat_food_key is None:
             raise ValueError('eat_food_key must be specified if eat_food is set to True.')
         self.send_key(eat_food_key)
-        sleep(5.0)
+        sleep(self._post_food_delay)
         food_t1 = time.time() + MEAT_AND_MEAD[self._meat_and_mead] * 60
 
         return food_t1
