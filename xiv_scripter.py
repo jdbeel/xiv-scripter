@@ -109,7 +109,7 @@ class XIVScripter:
         if eat_food_key is None:
             raise ValueError('eat_food_key must be specified if eat_food is set to True.')
         self.send_key(eat_food_key)
-        sleep(2.5)
+        sleep(5.0)
         food_t1 = time.time() + MEAT_AND_MEAD[self._meat_and_mead] * 60
 
         return food_t1

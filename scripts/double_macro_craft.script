@@ -11,5 +11,5 @@ sel 1.5
 sel 1.5
 
 # The delay here may need to be adjusted depending on your macro
-chicken_macro_1 35
-chicken_macro_2 30
+double_macro_1 35
+double_macro_2 30
