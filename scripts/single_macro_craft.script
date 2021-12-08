@@ -8,7 +8,8 @@
 # begin the craft
 sel 1.5
 sel 1.5
-sel 2.0
+sel 1.5
+sel 1.5
 
 # The delay here may need to be adjusted depending on your macro
-single_macro 28
+single_macro 35
